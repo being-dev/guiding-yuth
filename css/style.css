@@ -393,7 +393,7 @@ a:focus, a:hover {
 .single-page-header {
   /*background-image: url("../images/about/about-header.jpg");*/
   background-size: cover;
-  padding: 50px 0 70px;
+  padding: 35px 0 70px;
   text-align: center;
   color: #fff;
   position: relative;
