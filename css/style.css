@@ -397,6 +397,7 @@ a:focus, a:hover {
   text-align: center;
   color: #fff;
   position: relative;
+  background-repeat: round;
 }
 
 .single-page-header:before {
