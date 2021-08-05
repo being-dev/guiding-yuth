@@ -1,3 +1,6 @@
+if (location.protocol == 'http:'){
+		  location.href = location.href.replace("http","https");
+}
 $("#topheader").html(
 '<header class="navigation fixed-top">'+
   '<div class="container">'+
