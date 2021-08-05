@@ -11,11 +11,11 @@
 
   $(window).on('load', function () {
     $('#preloader').fadeOut('slow', function () {
-      $(this).remove();
+      $(this).hide();
     });
   });
 
-  
+
   //Hero Slider
   $('.hero-slider').slick({
     autoplay: true,
@@ -51,14 +51,14 @@
   /*	Portfolio Filtering Hook
   /* =========================================================================  */
 
-    // filter
-    setTimeout(function(){
-      var containerEl = document.querySelector('.filtr-container');
-      var filterizd;
-      if (containerEl) {
-        filterizd = $('.filtr-container').filterizr({});
-      }
-    }, 500);
+  // filter
+  setTimeout(function () {
+    var containerEl = document.querySelector('.filtr-container');
+    var filterizd;
+    if (containerEl) {
+      filterizd = $('.filtr-container').filterizr({});
+    }
+  }, 500);
 
   /* ========================================================================= */
   /*	Testimonial Carousel
@@ -108,51 +108,157 @@
   /* ========================================================================= */
 
   $('#contact-form').validate({
-      rules: {
-        name: {
-          required: true,
-          minlength: 4
-        },
-        email: {
-          required: true,
-          email: true
-        },
-        subject: {
-          required: false
-        },
-        message: {
-          required: true
-        }
+    errorClass: 'form-error',
+    errorElement: 'span',
+    rules: {
+      txt_name: {
+        required: true
       },
-      messages: {
-        user_name: {
-          required: 'Come on, you have a name don\'t you?',
-          minlength: 'Your name must consist of at least 2 characters'
-        },
-        email: {
-          required: 'Please put your email address'
-        },
-        message: {
-          required: 'Put some messages here?',
-          minlength: 'Your name must consist of at least 2 characters'
-        }
+      txt_email: {
+        required: true,
+        email: true
       },
-      submitHandler: function (form) {
-        $(form).ajaxSubmit({
-          type: 'POST',
-          data: $(form).serialize(),
-          url: 'sendmail.php',
-          success: function () {
-            $('#contact-form #success').fadeIn();
-          },
-          error: function () {
-            $('#contact-form #error').fadeIn();
-          }
-        });
+      txt_subject: {
+        required: true
+      },
+      txt_message: {
+        required: true
       }
+    },
+    messages: {
+      txt_name: {
+        required: 'Please provide your name'
+      },
+      txt_email: {
+        required: 'Please provide your email address',
+        email:'Please provide your valid email address'
+      },
+      txt_subject: {
+        required: 'Please provide your query subject'
+      },
+      txt_message: {
+        required: 'Please provide your query describtion ',
+      }
+    },
+    submitHandler: function (form) {
+      $('#form-message').removeClass();
+      $('#preloader').show('slow');
+      $.ajax({
+        type: 'POST',
+        data: JSON.stringify($('#contact-form').serializeFormJSON()),
+        url: 'https://q8cvv81t00.execute-api.ap-southeast-1.amazonaws.com/dev/api/v1/secure/contact/save',
+        dataType: 'json',
+        complete: function (xhr, status) {
+          $('#preloader').hide('slow');
+          if (xhr.status == 200) {
+            $('#form-message').html(xhr.responseText);
+            $('#form-message').addClass('alert alert-success');
+            $('#form-message').fadeIn();
+            $("#contact-form").trigger("reset");
+          } else {
+            $('#form-message').html(xhr.responseText);
+            $('#form-message').addClass('alert alert-danger');
+            $('#form-message').fadeIn();
+          }
+        }
+      });
     }
+  }
 
   );
+
+  $('#registration-form').validate({
+
+    errorClass: 'form-error',
+    errorElement: 'span',
+
+    rules: {
+      txt_first_name: {
+        required: true,
+        minlength: 2
+      }, txt_middle_name: {
+        required: true,
+        minlength: 2
+      }, txt_last_name: {
+        required: true,
+        minlength: 2
+      }, txt_mobile_no: {
+        required: true,
+        minlength: 10
+      }, txt_birth_date: {
+        required: true,
+        minlength: 10
+      }, txt_address: {
+        required: true,
+        minlength: 10
+      }, txt_education: {
+        required: true,
+        minlength: 2
+      }, txt_look_for: {
+        required: true
+      }, txt_add_info: {
+        required: true
+      }
+    },
+    messages: {
+      txt_first_name: {
+        required: 'Please provide your first name',
+        minlength: 'First name must consist of at least 2 characters'
+      },
+      txt_middle_name: {
+        required: 'Please provide your middle name',
+        minlength: 'Middle name must consist of at least 2 characters'
+      },
+      txt_last_name: {
+        required: 'Please provide your last name',
+        minlength: 'Last name must consist of at least 2 characters'
+      }, txt_mobile_no: {
+        required: 'Please provide your mobile no.',
+        minlength: 'First name must consist of at least 2 characters'
+      }, txt_birth_date: {
+        required: 'Please provide your birth date',
+        minlength: 'Please provide valid birth date'
+      }, txt_address: {
+        required: 'Please provide your address details',
+        minlength: 'Please provide valid address details.'
+      }, txt_education: {
+        required: 'Please provide your education information',
+        minlength: 'Please provide valid education qualification'
+      }, txt_look_for: {
+        required: 'Please select what you are looking for'
+      }, txt_add_info: {
+        required: 'Any additional information or interest or qualification or specialization'
+      }
+
+    },
+    submitHandler: function (form) {
+      $('#preloader').show('slow');
+      $('#form-message').removeClass();
+      $.ajax({
+        type: 'POST',
+        data: JSON.stringify($('#registration-form').serializeFormJSON()),
+        url: 'https://q8cvv81t00.execute-api.ap-southeast-1.amazonaws.com/dev/api/v1/secure/register/save',
+        dataType: 'json',
+        complete: function (xhr, status) {
+          $('#preloader').hide('slow');
+          if (xhr.status == 200) {
+            $('#form-message').html(xhr.responseText);
+            $('#form-message').addClass('alert alert-success');
+            $('#form-message').fadeIn();
+            $("#registration-form").trigger("reset");
+          } else {
+            $('#form-message').html(xhr.responseText);
+            $('#form-message').addClass('alert alert-danger');
+            $('#form-message').fadeIn();
+          }
+        }
+      });
+    }
+  });
+
+  $('#btn_cancel').click(function() {
+    $("#registration-form").trigger("reset");
+  });
 
   /* ========================================================================= */
   /*	On scroll fade/bounce effect
@@ -194,4 +300,21 @@
     counter();
   });
 
+  $.fn.serializeFormJSON = function () {
+
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function () {
+      if (o[this.name]) {
+        if (!o[this.name].push) {
+          o[this.name] = [o[this.name]];
+        }
+        o[this.name].push(this.value || '');
+      } else {
+        o[this.name] = this.value || '';
+      }
+    });
+    return o;
+  };
+ 
 })(jQuery);

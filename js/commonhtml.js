@@ -16,17 +16,14 @@ $("#topheader").html(
               '<a class="nav-link" href="index.html">Home</a>'+
           '</li>'+
           '<li class="nav-item ">'+
-            '<a class="nav-link" href="#">Registration</a>'+
+            '<a class="nav-link" href="registration.html">Registration</a>'+
           '</li>'+
           '<li class="nav-item ">'+
-            '<a class="nav-link" href="#">Feedback</a>'+
+            '<a class="nav-link" href="contact-us.html">Contact Us</a>'+
           '</li>'+
           '<li class="nav-item ">'+
             '<a class="nav-link" href="team.html">Team</a>'+
-          '</li>'+
-          '<li class="nav-item ">'+
-            '<a class="nav-link" href="#l">Testimony</a>'+
-          '</li>'+
+          '</li>'+          
         '</ul>'+
       '</div>'+
     '</nav>'+

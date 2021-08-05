@@ -112,8 +112,8 @@ function initialize() {
     });
 }
 
-var map = document.getElementById('map_canvas');
+// var map = document.getElementById('map_canvas');
 
-if( map != null){
-    google.maps.event.addDomListener(window, 'load', initialize);
-}
+// if( map != null){
+//     google.maps.event.addDomListener(window, 'load', initialize);
+// }

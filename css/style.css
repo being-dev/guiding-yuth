@@ -913,17 +913,27 @@ a:focus, a:hover {
   color: #0c0c0c;
   height: 38px;
   font-family: 'Open Sans', sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   border-radius: 0;
 }
 
 .contact-form input:hover,
 .contact-form textarea:hover,
-.contact-form #contact-submit:hover {
+.contact-form #contact-submit:hover,.form-btn:hover {
   border-color: #28ABE3;
 }
 
 .contact-form #contact-submit {
+  border: none;
+  padding: 15px 0;
+  width: 100%;
+  margin: 0;
+  background: #28ABE3;
+  color: #fff;
+  border-radius: 0;
+}
+
+.form-btn {
   border: none;
   padding: 15px 0;
   width: 100%;
@@ -999,7 +1009,7 @@ a:focus, a:hover {
   padding: 10px;
 }
 
-#error, #success {
+#error, #success,#form-message {
   display: none;
   margin-bottom: 10px;
 }
@@ -2396,4 +2406,23 @@ a:focus, a:hover {
   }
 }
 
-/*# sourceMappingURL=maps/style.css.map */
+.font_10 {
+  font-size: 10px !important;
+}
+
+.font_12 {
+  font-size: 12px !important;
+}
+
+.required {
+  color: red !important;
+}
+.text-bold {
+  font-weight: bold;
+}
+
+.form-error {
+  color: rgb(213, 73, 73) !important;
+  font-size: 12px !important;
+  
+}
