@@ -258,6 +258,13 @@
 
   $('#btn_cancel').click(function() {
     $("#registration-form").trigger("reset");
+    var ele = $("#registration-form").find(".form-error");
+    $("#registration-form").find(".form-error").removeClass('form-error');
+    for(var i=0;i<ele.length ;i++) {
+      if(ele[i].tagName == 'SPAN') {
+        ele[i].remove();
+      }
+    }    
   });
 
   /* ========================================================================= */
