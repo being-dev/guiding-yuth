@@ -102,11 +102,6 @@
     slidesToScroll: 1
   });
 
-
-  $.validator.addMethod("pattern", function(value, element) {
-    return this.optional(element) || /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z.]{2,5}$/i.test(value);
-  }, "Email Address is invalid: Please enter a valid email address.");
-
   /* ========================================================================= */
   /*   Contact Form Validating
   /* ========================================================================= */
@@ -149,28 +144,26 @@
     submitHandler: function (form) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       $('#form-message').removeClass();
-      // $("div.spanner").addClass("show");
-      // $("div.overlay").addClass("show");
       $('#preloader').show('fadeIn');
-      // $.ajax({
-      //   type: 'POST',
-      //   data: JSON.stringify($('#contact-form').serializeFormJSON()),
-      //   url: 'https://q8cvv81t00.execute-api.ap-southeast-1.amazonaws.com/dev/api/v1/secure/contact/save',
-      //   dataType: 'json',
-      //   complete: function (xhr, status) {
-      //     $('#preloader').hide('slow');
-      //     if (xhr.status == 200) {
-      //       $('#form-message').html(xhr.responseText);
-      //       $('#form-message').addClass('alert alert-success');
-      //       $('#form-message').fadeIn();
-      //       $("#contact-form").trigger("reset");
-      //     } else {
-      //       $('#form-message').html(xhr.responseText);
-      //       $('#form-message').addClass('alert alert-danger');
-      //       $('#form-message').fadeIn();
-      //     }
-      //   }
-      // });
+      $.ajax({
+        type: 'POST',
+        data: JSON.stringify($('#contact-form').serializeFormJSON()),
+        url: 'https://q8cvv81t00.execute-api.ap-southeast-1.amazonaws.com/dev/api/v1/secure/contact/save',
+        dataType: 'json',
+        complete: function (xhr, status) {
+          $('#preloader').hide('slow');
+          if (xhr.status == 200) {
+            $('#form-message').html(xhr.responseText);
+            $('#form-message').addClass('alert alert-success');
+            $('#form-message').fadeIn();
+            $("#contact-form").trigger("reset");
+          } else {
+            $('#form-message').html(xhr.responseText);
+            $('#form-message').addClass('alert alert-danger');
+            $('#form-message').fadeIn();
+          }
+        }
+      });
     }
   }
 
@@ -193,7 +186,8 @@
         minlength: 2
       }, txt_mobile_no: {
         required: true,
-        minlength: 10
+        minlength: 10,
+        maxlength: 10
       }, txt_birth_date: {
         required: true,
         minlength: 10
@@ -242,8 +236,8 @@
     },
     submitHandler: function (form) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      $('#preloader').show('slow');
       $('#form-message').removeClass();
+      $('#preloader').show('fadeIn');
       $.ajax({
         type: 'POST',
         data: JSON.stringify($('#registration-form').serializeFormJSON()),
