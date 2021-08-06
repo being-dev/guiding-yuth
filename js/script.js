@@ -114,9 +114,9 @@
       txt_name: {
         required: true
       },
-      txt_email: {
+      txt_mobile: {
         required: true,
-        email: true
+        minlength: 10
       },
       txt_subject: {
         required: true
@@ -129,9 +129,9 @@
       txt_name: {
         required: 'Please provide your name'
       },
-      txt_email: {
-        required: 'Please provide your email address',
-        email:'Please provide your valid email address'
+      txt_mobile: {
+        required: 'Please provide your mobile no,',
+        minlength: 'Please provide your valid mobile no.'
       },
       txt_subject: {
         required: 'Please provide your query subject'
@@ -214,7 +214,7 @@
         minlength: 'Last name must consist of at least 2 characters'
       }, txt_mobile_no: {
         required: 'Please provide your mobile no.',
-        minlength: 'First name must consist of at least 2 characters'
+        minlength: 'Please provide your valid mobile no.'
       }, txt_birth_date: {
         required: 'Please provide your birth date',
         minlength: 'Please provide valid birth date'
@@ -265,6 +265,50 @@
         ele[i].remove();
       }
     }    
+  });
+
+  $('#login-form').validate({
+    errorClass: 'form-error',
+    errorElement: 'span',
+    rules: {
+      txt_username: {
+        required: true
+      },
+      txt_password: {
+        required: true
+      }      
+    },
+    messages: {
+      txt_username: {
+        required: 'Please provide username'
+      },
+      txt_password: {
+        required: 'Please provide your password'
+      }      
+    },
+    submitHandler: function (form) {
+      $('#login-form').removeClass();
+      $('#preloader').show('slow');
+      $.ajax({
+        type: 'POST',
+        data: JSON.stringify($('#contact-form').serializeFormJSON()),
+        url: 'https://q8cvv81t00.execute-api.ap-southeast-1.amazonaws.com/dev/api/v1/secure/login/auth',
+        dataType: 'json',
+        complete: function (xhr, status) {
+          $('#preloader').hide('slow');
+          if (xhr.status == 200) {
+            $('#form-message').html(xhr.responseText);
+            $('#form-message').addClass('alert alert-success');
+            $('#form-message').fadeIn();
+            $("#contact-form").trigger("reset");
+          } else {
+            $('#form-message').html(xhr.responseText);
+            $('#form-message').addClass('alert alert-danger');
+            $('#form-message').fadeIn();
+          }
+        }
+      });
+    }
   });
 
   /* ========================================================================= */
