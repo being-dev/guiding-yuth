@@ -42,16 +42,12 @@
     <!--
   Start Preloader
   ==================================== -->
-    <div id="preloader">
-        <div class='preloader'>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+  <div id="preloader">
+    <div class='preloader'>
+        <div class="loader"></div>
+        <h3 style="color: #ffffff;">Please wait...</h3>
     </div>
+  </div>
     <!--
   End Preloader
   ==================================== -->
@@ -111,7 +107,7 @@
                             <label class="form-label font_12 text-bold" for="id_mobile_no">Mobile No.<span
                                     class="required">(*)</span></label>
                             <input type="number" placeholder="Mobile No." class="form-control" name="txt_mobile_no"
-                                id="id_mobile_no" minlength="10" autocomplete="off">
+                                id="id_mobile_no" minlength="10" maxlength="10" autocomplete="off">
                         </div>
                     </div>
                     <div class="col-md-4">

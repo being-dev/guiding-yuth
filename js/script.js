@@ -103,6 +103,10 @@
   });
 
 
+  $.validator.addMethod("pattern", function(value, element) {
+    return this.optional(element) || /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z.]{2,5}$/i.test(value);
+  }, "Email Address is invalid: Please enter a valid email address.");
+
   /* ========================================================================= */
   /*   Contact Form Validating
   /* ========================================================================= */
@@ -116,7 +120,8 @@
       },
       txt_mobile: {
         required: true,
-        minlength: 10
+        minlength: 10,
+        maxlength: 10        
       },
       txt_subject: {
         required: true
@@ -131,7 +136,8 @@
       },
       txt_mobile: {
         required: 'Please provide your mobile no,',
-        minlength: 'Please provide your valid mobile no.'
+        minlength: 'Please provide your valid mobile no.',
+        maxlength: 'Mobile no. can have max 10 digits'
       },
       txt_subject: {
         required: 'Please provide your query subject'
@@ -143,26 +149,28 @@
     submitHandler: function (form) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       $('#form-message').removeClass();
-      $('#preloader').show('slow');
-      $.ajax({
-        type: 'POST',
-        data: JSON.stringify($('#contact-form').serializeFormJSON()),
-        url: 'https://q8cvv81t00.execute-api.ap-southeast-1.amazonaws.com/dev/api/v1/secure/contact/save',
-        dataType: 'json',
-        complete: function (xhr, status) {
-          $('#preloader').hide('slow');
-          if (xhr.status == 200) {
-            $('#form-message').html(xhr.responseText);
-            $('#form-message').addClass('alert alert-success');
-            $('#form-message').fadeIn();
-            $("#contact-form").trigger("reset");
-          } else {
-            $('#form-message').html(xhr.responseText);
-            $('#form-message').addClass('alert alert-danger');
-            $('#form-message').fadeIn();
-          }
-        }
-      });
+      // $("div.spanner").addClass("show");
+      // $("div.overlay").addClass("show");
+      $('#preloader').show('fadeIn');
+      // $.ajax({
+      //   type: 'POST',
+      //   data: JSON.stringify($('#contact-form').serializeFormJSON()),
+      //   url: 'https://q8cvv81t00.execute-api.ap-southeast-1.amazonaws.com/dev/api/v1/secure/contact/save',
+      //   dataType: 'json',
+      //   complete: function (xhr, status) {
+      //     $('#preloader').hide('slow');
+      //     if (xhr.status == 200) {
+      //       $('#form-message').html(xhr.responseText);
+      //       $('#form-message').addClass('alert alert-success');
+      //       $('#form-message').fadeIn();
+      //       $("#contact-form").trigger("reset");
+      //     } else {
+      //       $('#form-message').html(xhr.responseText);
+      //       $('#form-message').addClass('alert alert-danger');
+      //       $('#form-message').fadeIn();
+      //     }
+      //   }
+      // });
     }
   }
 
