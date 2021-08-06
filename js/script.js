@@ -141,6 +141,7 @@
       }
     },
     submitHandler: function (form) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       $('#form-message').removeClass();
       $('#preloader').show('slow');
       $.ajax({
@@ -232,6 +233,7 @@
 
     },
     submitHandler: function (form) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       $('#preloader').show('slow');
       $('#form-message').removeClass();
       $.ajax({
