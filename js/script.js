@@ -1,6 +1,12 @@
 (function ($) {
   'use strict';
 
+  // $.ajaxSetup({
+  //   xhrFields: {
+  //     withCredentials: true
+  //   }
+  // });
+
   /* ========================================================================= */
   /*	Page Preloader
   /* ========================================================================= */
@@ -148,7 +154,7 @@
       $.ajax({
         type: 'POST',
         data: JSON.stringify($('#contact-form').serializeFormJSON()),
-        url: 'https://q8cvv81t00.execute-api.ap-southeast-1.amazonaws.com/dev/api/v1/secure/contact/save',
+        url: 'https://2bdwgnrb4m.execute-api.ap-southeast-1.amazonaws.com/dev/api/v1/secure/contact/save',
         dataType: 'json',
         complete: function (xhr, status) {
           $('#preloader').hide('slow');
@@ -241,7 +247,7 @@
       $.ajax({
         type: 'POST',
         data: JSON.stringify($('#registration-form').serializeFormJSON()),
-        url: 'https://q8cvv81t00.execute-api.ap-southeast-1.amazonaws.com/dev/api/v1/secure/register/save',
+        url: 'https://2bdwgnrb4m.execute-api.ap-southeast-1.amazonaws.com/dev/api/v1/secure/register/save',
         dataType: 'json',
         complete: function (xhr, status) {
           $('#preloader').hide('slow');
@@ -291,20 +297,21 @@
       }      
     },
     submitHandler: function (form) {
-      $('#login-form').removeClass();
+      $('#form-message').removeClass();
       $('#preloader').show('slow');
       $.ajax({
         type: 'POST',
-        data: JSON.stringify($('#contact-form').serializeFormJSON()),
-        url: 'https://q8cvv81t00.execute-api.ap-southeast-1.amazonaws.com/dev/api/v1/secure/login/auth',
+        data: JSON.stringify($('#login-form').serializeFormJSON()),
+        url: 'https://2bdwgnrb4m.execute-api.ap-southeast-1.amazonaws.com/dev/api/v1/secure/login/auth',
         dataType: 'json',
         complete: function (xhr, status) {
           $('#preloader').hide('slow');
           if (xhr.status == 200) {
-            $('#form-message').html(xhr.responseText);
-            $('#form-message').addClass('alert alert-success');
+            //$('#form-message').html(xhr.responseText);
+            //$('#form-message').addClass('alert alert-success');
             $('#form-message').fadeIn();
-            $("#contact-form").trigger("reset");
+            $.cookie("Authorization", xhr.responseText);
+            window.location.href='home.html'
           } else {
             $('#form-message').html(xhr.responseText);
             $('#form-message').addClass('alert alert-danger');
@@ -371,5 +378,7 @@
     });
     return o;
   };
+
+  
  
 })(jQuery);
