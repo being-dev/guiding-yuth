@@ -4,7 +4,7 @@ $(function () {
     $('#preloader').show('slow');
     $.ajax({
         type: 'POST',
-        url: 'https://2bdwgnrb4m.execute-api.ap-southeast-1.amazonaws.com/dev/api/v1/secure/admin/list',
+        url: 'https://orfxjoyrkb.execute-api.ap-southeast-1.amazonaws.com/prod/api/v1/secure/admin/list',
         dataType: 'json',       
         complete: function (xhr, status) {
             $('#preloader').hide('slow');

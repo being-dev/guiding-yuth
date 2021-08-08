@@ -154,7 +154,7 @@
       $.ajax({
         type: 'POST',
         data: JSON.stringify($('#contact-form').serializeFormJSON()),
-        url: 'https://2bdwgnrb4m.execute-api.ap-southeast-1.amazonaws.com/dev/api/v1/secure/contact/save',
+        url: 'https://orfxjoyrkb.execute-api.ap-southeast-1.amazonaws.com/prod/api/v1/secure/contact/save',
         dataType: 'json',
         complete: function (xhr, status) {
           $('#preloader').hide('slow');
@@ -247,7 +247,7 @@
       $.ajax({
         type: 'POST',
         data: JSON.stringify($('#registration-form').serializeFormJSON()),
-        url: 'https://2bdwgnrb4m.execute-api.ap-southeast-1.amazonaws.com/dev/api/v1/secure/register/save',
+        url: 'https://orfxjoyrkb.execute-api.ap-southeast-1.amazonaws.com/prod/api/v1/secure/register/save',
         dataType: 'json',
         complete: function (xhr, status) {
           $('#preloader').hide('slow');
@@ -302,7 +302,7 @@
       $.ajax({
         type: 'POST',
         data: JSON.stringify($('#login-form').serializeFormJSON()),
-        url: 'https://2bdwgnrb4m.execute-api.ap-southeast-1.amazonaws.com/dev/api/v1/secure/login/auth',
+        url: 'https://orfxjoyrkb.execute-api.ap-southeast-1.amazonaws.com/prod/api/v1/secure/login/auth',
         dataType: 'json',
         complete: function (xhr, status) {
           $('#preloader').hide('slow');
