@@ -139,7 +139,7 @@ function checkServerConfiguration() {
 
 function loadServerConfiguration() {
   $.ajax({
-      url: '../config/app-prod-server-config.json',
+      url: '../config/app-dev-server-config.json',
       type: 'GET',
       dataType: 'json',
       complete: function (xhr) {
