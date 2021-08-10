@@ -65,21 +65,22 @@
                         <h2>Candidate Registration List</h2>
                         <div id="alert-message"></div>
                     </div>
-                    <div class="table-responsive"> 
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Mobile No.</th>
-                                <th>Education</th>
-                                <th>Birth Date</th>
-                                <th>Address</th>
-                                <th>Looking For</th>
-                                <th>Additional Info</th>
-                            </tr>
-                        </thead>
-                        <tbody id="cand_tbody"></tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover table-striped table-sm">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Mobile No.</th>
+                                    <th>Education</th>
+                                    <th>Birth Date</th>
+                                    <th>Address</th>
+                                    <th>Looking For</th>
+                                    <th>Additional Info</th>
+                                    <th>Registration Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cand_tbody"></tbody>
+                        </table>
                     </div>
                 </div>
 
@@ -113,9 +114,15 @@
     <script src="../plugins/smooth-scroll/smooth-scroll.min.js"></script>
 
     <!-- Custom js -->
-    <script src="../js/script.js"></script>
     <script src="../js/commonhtml.js"></script>
-    <script src="js/admin-js.js"></script>
+    <script src="./js/admin-js.js"></script>
+    <script type="text/javascript">
+        init();
+        function init() {
+            loadRegistrationsDetails();
+        }
+    </script>
+
 
 </body>
 

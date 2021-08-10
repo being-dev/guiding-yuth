@@ -39,18 +39,18 @@
     <!--
   Start Preloader
   ==================================== -->
-  <div id="preloader">
-    <div class='preloader'>
-        <div class="loader"></div>
-        <h3 style="color: #ffffff;">Please wait...</h3>
+    <div id="preloader">
+        <div class='preloader'>
+            <div class="loader"></div>
+            <h3 style="color: #ffffff;">Please wait...</h3>
+        </div>
     </div>
-  </div>
     <!--
   End Preloader
   ==================================== -->
 
 
-    
+
     <div id="admin-topheader" style="margin-top: -22px;"></div>
     <section class="single-page-header">&nbsp;</section>
 
@@ -59,16 +59,30 @@
     <section class="about" id="about">
         <div class="container">
             <div class="row">
-            
+
                 <div class="col-md-12">
-                <div class="title text-center"  >
-                    
+                    <div class="title">
+                        <h2>Candidate Queries List</h2>
+                        <div id="alert-message"></div>
+                    </div>
+                    <div class="table-responsive"> 
+                    <table class="table table-bordered table-hover table-striped table-sm">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Name</th>
+                                <th>Mobile No.</th>
+                                <th>Query Date</th>
+                                <th>Query Description</th>                                
+                            </tr>
+                        </thead>
+                        <tbody id="cand_query_tbody"></tbody>
+                    </table>
+                    </div>
                 </div>
-                </div>
-                
-            </div> 		<!-- End row -->
-        </div>   	<!-- End container -->
-    </section>   <!-- End section -->
+
+            </div> <!-- End row -->
+        </div> <!-- End container -->
+    </section> <!-- End section -->
 
     <div id="admin-footerdata"></div>
 
@@ -96,8 +110,15 @@
     <script src="../plugins/smooth-scroll/smooth-scroll.min.js"></script>
 
     <!-- Custom js -->
-    <script src="../js/script.js"></script>
     <script src="../js/commonhtml.js"></script>
+    <script src="./js/admin-js.js"></script>
+    <script type="text/javascript">
+        init();
+        function init() {
+            loadQueriesDetails();
+        }
+    </script>
+
 
 </body>
 

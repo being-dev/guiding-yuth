@@ -151,10 +151,11 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
       $('#form-message').removeClass();
       $('#preloader').show('fadeIn');
+      var url = buildUrl('/contact/save');
       $.ajax({
         type: 'POST',
         data: JSON.stringify($('#contact-form').serializeFormJSON()),
-        url: 'https://orfxjoyrkb.execute-api.ap-southeast-1.amazonaws.com/prod/api/v1/secure/contact/save',
+        url: url,
         dataType: 'json',
         complete: function (xhr, status) {
           $('#preloader').hide('slow');
@@ -244,10 +245,11 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
       $('#form-message').removeClass();
       $('#preloader').show('fadeIn');
+      var url = buildUrl('/register/save');
       $.ajax({
         type: 'POST',
         data: JSON.stringify($('#registration-form').serializeFormJSON()),
-        url: 'https://orfxjoyrkb.execute-api.ap-southeast-1.amazonaws.com/prod/api/v1/secure/register/save',
+        url: url,
         dataType: 'json',
         complete: function (xhr, status) {
           $('#preloader').hide('slow');
@@ -276,52 +278,7 @@
       }
     }    
   });
-
-  $('#login-form').validate({
-    errorClass: 'form-error',
-    errorElement: 'span',
-    rules: {
-      txt_username: {
-        required: true
-      },
-      txt_password: {
-        required: true
-      }      
-    },
-    messages: {
-      txt_username: {
-        required: 'Please provide username'
-      },
-      txt_password: {
-        required: 'Please provide your password'
-      }      
-    },
-    submitHandler: function (form) {
-      $('#form-message').removeClass();
-      $('#preloader').show('slow');
-      $.ajax({
-        type: 'POST',
-        data: JSON.stringify($('#login-form').serializeFormJSON()),
-        url: 'https://orfxjoyrkb.execute-api.ap-southeast-1.amazonaws.com/prod/api/v1/secure/login/auth',
-        dataType: 'json',
-        complete: function (xhr, status) {
-          $('#preloader').hide('slow');
-          if (xhr.status == 200) {
-            //$('#form-message').html(xhr.responseText);
-            //$('#form-message').addClass('alert alert-success');
-            $('#form-message').fadeIn();
-            $.cookie("Authorization", xhr.responseText);
-            window.location.href='home.html'
-          } else {
-            $('#form-message').html(xhr.responseText);
-            $('#form-message').addClass('alert alert-danger');
-            $('#form-message').fadeIn();
-          }
-        }
-      });
-    }
-  });
-
+  
   /* ========================================================================= */
   /*	On scroll fade/bounce effect
   /* ========================================================================= */
@@ -361,24 +318,5 @@
   $(window).scroll(function () {
     counter();
   });
-
-  $.fn.serializeFormJSON = function () {
-
-    var o = {};
-    var a = this.serializeArray();
-    $.each(a, function () {
-      if (o[this.name]) {
-        if (!o[this.name].push) {
-          o[this.name] = [o[this.name]];
-        }
-        o[this.name].push(this.value || '');
-      } else {
-        o[this.name] = this.value || '';
-      }
-    });
-    return o;
-  };
-
-  
  
 })(jQuery);
