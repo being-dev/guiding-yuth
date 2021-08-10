@@ -102,9 +102,9 @@ $("#admin-topheader").html(
   '<li class="nav-item ">' +
   '<a class="nav-link" href="candidate-queries.html">Queries</a>' +
   '</li>' +
-  '<li class="nav-item ">' +
-  '<a class="nav-link" href="javascript:void(0);" id="adminLogout">Logout</a>' +
-  '</li>' +
+  // '<li class="nav-item ">' +
+  // '<a class="nav-link" href="javascript:void(0);" id="adminLogout">Logout</a>' +
+  // '</li>' +
   '</ul>' +
   '</div>' +
   '</nav>' +
