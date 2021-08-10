@@ -45,7 +45,6 @@ $(function () {
           });
         }
       });
-
 });
 
 // Admin :: Candidate List Page Functionality 

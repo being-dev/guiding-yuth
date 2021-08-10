@@ -1,16 +1,18 @@
-if (location.protocol == 'http:'){
-		  location.href = location.href.replace("http","https");
+if (location.protocol == 'http:') {
+  //location.href = location.href.replace("http", "https");
 }
 
-$(function(){
-
+$(function () {
   $(window).on('load', function () {
+
+    checkServerConfiguration();
+
     $('#preloader').fadeOut('slow', function () {
       $(this).hide();
     });
   });
 
-   /* ========================================================================= */
+  /* ========================================================================= */
   /*	Header Scroll Background Change
   /* ========================================================================= */
   $(window).scroll(function () {
@@ -39,98 +41,122 @@ $(function(){
     return o;
   };
 
-});
+  $("#topheader").html(
+    '<header class="navigation fixed-top">' +
+    '<div class="container">' +
+    '<nav class="navbar navbar-expand-lg navbar-light">' +
+    '<a class="navbar-brand logo" href="index.html">' +
+    '<img class="logo-default" src="images/logo.png" alt="logo"/>' +
+    '<img class="logo-white" src="images/logo-white.png" alt="logo"/>' +
+    '</a>' +
+    '<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"' +
+    'aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">' +
+    '<span class="navbar-toggler-icon"></span>' +
+    '</button>' +
+    '<div class="collapse navbar-collapse" id="navigation">' +
+    '<ul class="navbar-nav ml-auto text-center">' +
+    '<li class="nav-item">' +
+    '<a class="nav-link" href="index.html">Home</a>' +
+    '</li>' +
+    '<li class="nav-item ">' +
+    '<a class="nav-link" href="registration.html">Registration</a>' +
+    '</li>' +
+    '<li class="nav-item ">' +
+    '<a class="nav-link" href="contact-us.html">Contact Us</a>' +
+    '</li>' +
+    '<li class="nav-item ">' +
+    '<a class="nav-link" href="team.html">Team</a>' +
+    '</li>' +
+    '</ul>' +
+    '</div>' +
+    '</nav>' +
+    '</div>' +
+    '</header>');
 
-const http_protocol = 'https://';
-const server_subdomain = 'orfxjoyrkb';
-const server_name = 'execute-api.ap-southeast-1.amazonaws.com';
-const server_stage = 'prod';
-const api_version = '/api/v1';
-const context_path = '/secure';
+  $("#footerdata").html(
+    '<footer id="footer" class="bg-one">' +
+    '<div class="footer-bottom">' +
+    '<h5>Copyright 2021. All rights reserved. Yuva Margdarshak</h5>' +
+    '</div>' +
+    '</footer>');
+
+  $("#admin-topheader").html(
+    '<header class="navigation fixed-top sticky-header">' +
+    '<div class="container">' +
+    '<nav class="navbar navbar-expand-lg navbar-light">' +
+    '<a class="navbar-brand logo" href="home.html">' +
+    '<img class="logo-default" src="images/logo.png" alt="logo"/>' +
+    '<img class="logo-white" src="images/logo-white.png" alt="logo"/>' +
+    '</a>' +
+    '<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"' +
+    'aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">' +
+    '<span class="navbar-toggler-icon"></span>' +
+    '</button>' +
+    '<div class="collapse navbar-collapse" id="navigation">' +
+    '<ul class="navbar-nav ml-auto text-center">' +
+    '<li class="nav-item">' +
+    '<a class="nav-link" href="./home.html">Home</a>' +
+    '</li>' +
+    '<li class="nav-item ">' +
+    '<a class="nav-link" href="candidate-list.html">Candidate Registrations</a>' +
+    '</li>' +
+    '<li class="nav-item ">' +
+    '<a class="nav-link" href="candidate-queries.html">Queries</a>' +
+    '</li>' +
+    // '<li class="nav-item ">' +
+    // '<a class="nav-link" href="javascript:void(0);" id="adminLogout">Logout</a>' +
+    // '</li>' +
+    '</ul>' +
+    '</div>' +
+    '</nav>' +
+    '</div>' +
+    '</header>');
+
+  $("#admin-footerdata").html(
+    '<footer id="footer" class="bg-one">' +
+    '<div class="footer-bottom">' +
+    '<h5>Copyright 2021. All rights reserved. Yuva Margdarshak</h5>' +
+    '</div>' +
+    '</footer>');
+
+  $('#adminLogout').click(function (event) {
+    window.localStorage.clear();
+    window.location.href = './index.html';
+  });
+});
 
 function buildUrl(endpoint) {
-  return http_protocol + server_subdomain + '.' + server_name + '/' + server_stage +  api_version + context_path + endpoint;
+  checkServerConfiguration();
+  return window.atob(window.localStorage.getItem('SERVER_API_URI')) + endpoint;
 }
 
-$("#topheader").html(
-  '<header class="navigation fixed-top">' +
-  '<div class="container">' +
-  '<nav class="navbar navbar-expand-lg navbar-light">' +
-  '<a class="navbar-brand logo" href="index.html">' +
-  '<img class="logo-default" src="images/logo.png" alt="logo"/>' +
-  '<img class="logo-white" src="images/logo-white.png" alt="logo"/>' +
-  '</a>' +
-  '<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"' +
-  'aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">' +
-  '<span class="navbar-toggler-icon"></span>' +
-  '</button>' +
-  '<div class="collapse navbar-collapse" id="navigation">' +
-  '<ul class="navbar-nav ml-auto text-center">' +
-  '<li class="nav-item">' +
-  '<a class="nav-link" href="index.html">Home</a>' +
-  '</li>' +
-  '<li class="nav-item ">' +
-  '<a class="nav-link" href="registration.html">Registration</a>' +
-  '</li>' +
-  '<li class="nav-item ">' +
-  '<a class="nav-link" href="contact-us.html">Contact Us</a>' +
-  '</li>' +
-  '<li class="nav-item ">' +
-  '<a class="nav-link" href="team.html">Team</a>' +
-  '</li>' +
-  '</ul>' +
-  '</div>' +
-  '</nav>' +
-  '</div>' +
-  '</header>');
+function checkServerConfiguration() {
+  if (!window.localStorage.getItem('SERVER_API_URI') || window.localStorage.getItem('SERVER_API_URI').length == 0) {
+      loadServerConfiguration();
+  }
+}
 
-$("#footerdata").html(
-  '<footer id="footer" class="bg-one">' +
-  '<div class="footer-bottom">' +
-  '<h5>Copyright 2021. All rights reserved. Yuva Margdarshak</h5>' +
-  '</div>' +
-  '</footer>');
-
-$("#admin-topheader").html(
-  '<header class="navigation fixed-top sticky-header">' +
-  '<div class="container">' +
-  '<nav class="navbar navbar-expand-lg navbar-light">' +
-  '<a class="navbar-brand logo" href="home.html">' +
-  '<img class="logo-default" src="images/logo.png" alt="logo"/>' +
-  '<img class="logo-white" src="images/logo-white.png" alt="logo"/>' +
-  '</a>' +
-  '<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"' +
-  'aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">' +
-  '<span class="navbar-toggler-icon"></span>' +
-  '</button>' +
-  '<div class="collapse navbar-collapse" id="navigation">' +
-  '<ul class="navbar-nav ml-auto text-center">' +
-  '<li class="nav-item">' +
-  '<a class="nav-link" href="./home.html">Home</a>' +
-  '</li>' +
-  '<li class="nav-item ">' +
-  '<a class="nav-link" href="candidate-list.html">Candidate Registrations</a>' +
-  '</li>' +
-  '<li class="nav-item ">' +
-  '<a class="nav-link" href="candidate-queries.html">Queries</a>' +
-  '</li>' +
-  // '<li class="nav-item ">' +
-  // '<a class="nav-link" href="javascript:void(0);" id="adminLogout">Logout</a>' +
-  // '</li>' +
-  '</ul>' +
-  '</div>' +
-  '</nav>' +
-  '</div>' +
-  '</header>');
-
-$("#admin-footerdata").html(
-  '<footer id="footer" class="bg-one">' +
-  '<div class="footer-bottom">' +
-  '<h5>Copyright 2021. All rights reserved. Yuva Margdarshak</h5>' +
-  '</div>' +
-  '</footer>');
-
-$('#adminLogout').click(function (event) {
-  window.localStorage.clear();
-  window.location.href = './index.html';
-});
+function loadServerConfiguration() {
+  $.ajax({
+      url: '../config/app-prod-server-config.json',
+      type: 'GET',
+      dataType: 'json',
+      complete: function (xhr) {
+          if (xhr.status == 200) {
+              var json = (JSON.parse(xhr.responseText));
+              var AWS_SERVER_URI = "";
+              AWS_SERVER_URI = AWS_SERVER_URI.concat(json.protocol);
+              AWS_SERVER_URI = AWS_SERVER_URI.concat(json.subdomain);
+              AWS_SERVER_URI = AWS_SERVER_URI.concat('.');
+              AWS_SERVER_URI = AWS_SERVER_URI.concat(json.servername);
+              AWS_SERVER_URI = AWS_SERVER_URI.concat('/');
+              AWS_SERVER_URI = AWS_SERVER_URI.concat(json.stage);
+              AWS_SERVER_URI = AWS_SERVER_URI.concat(json.version);
+              AWS_SERVER_URI = AWS_SERVER_URI.concat(json.context);
+              window.localStorage.setItem('SERVER_API_URI', window.btoa(AWS_SERVER_URI));
+          } else {
+              alert('Something went wrong. Please try later sometime...')
+          }
+      }
+  });
+}
