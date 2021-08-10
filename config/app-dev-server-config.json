@@ -4,5 +4,5 @@
     "servername":"execute-api.ap-southeast-1.amazonaws.com",
     "stage":"dev",
     "version":"/api/v1",
-    "context":"secure"
+    "context":"/secure"
 }
