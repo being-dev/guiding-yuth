@@ -589,11 +589,11 @@ a:focus, a:hover {
 .sticky-header {
   color: #ffffff !important;
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.06);
-  background: #7f7f7f;
+  background: #ffffff;
 }
 
 .sticky-header .navbar-light .navbar-nav .nav-item .nav-link {
-  color: #ffffff;
+  color: #000000;
 }
 
 .sticky-header .logo-white {

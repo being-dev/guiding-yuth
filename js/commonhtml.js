@@ -15,9 +15,10 @@ $(function(){
   /* ========================================================================= */
   $(window).scroll(function () {
     var scroll = $(window).scrollTop();
-    if (scroll > 200) {
+    if (scroll > 1) {
       $('.navigation').addClass('sticky-header');
     } else {
+      //$('.navigation').toggle();
       $('.navigation').removeClass('sticky-header');
     }
   });
@@ -92,7 +93,7 @@ $("#footerdata").html(
   '</footer>');
 
 $("#admin-topheader").html(
-  '<header class="navigation fixed-top sticky-header">' +
+  '<header class="navigation fixed-top">' +
   '<div class="container">' +
   '<nav class="navbar navbar-expand-lg navbar-light">' +
   '<a class="navbar-brand logo" href="home.html">' +
