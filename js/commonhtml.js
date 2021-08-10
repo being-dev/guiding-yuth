@@ -30,9 +30,9 @@ $(function(){
 });
 
 const http_protocol = 'https://';
-const server_subdomain = 'lhjbw5sfsl';
+const server_subdomain = 'orfxjoyrkb';
 const server_name = 'execute-api.ap-southeast-1.amazonaws.com';
-const server_stage = 'dev';
+const server_stage = 'prod';
 const api_version = '/api/v1';
 const context_path = '/secure';
 
