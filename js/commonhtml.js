@@ -10,6 +10,18 @@ $(function(){
     });
   });
 
+   /* ========================================================================= */
+  /*	Header Scroll Background Change
+  /* ========================================================================= */
+  $(window).scroll(function () {
+    var scroll = $(window).scrollTop();
+    if (scroll > 200) {
+      $('.navigation').addClass('sticky-header');
+    } else {
+      $('.navigation').removeClass('sticky-header');
+    }
+  });
+
   $.fn.serializeFormJSON = function () {
 
     var o = {};
@@ -80,10 +92,10 @@ $("#footerdata").html(
   '</footer>');
 
 $("#admin-topheader").html(
-  '<header class="navigation fixed-top">' +
+  '<header class="navigation fixed-top sticky-header">' +
   '<div class="container">' +
   '<nav class="navbar navbar-expand-lg navbar-light">' +
-  '<a class="navbar-brand logo" href="index.html">' +
+  '<a class="navbar-brand logo" href="home.html">' +
   '<img class="logo-default" src="images/logo.png" alt="logo"/>' +
   '<img class="logo-white" src="images/logo-white.png" alt="logo"/>' +
   '</a>' +

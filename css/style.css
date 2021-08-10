@@ -572,7 +572,7 @@ a:focus, a:hover {
     background: #fff;
   }
   .navigation .navbar-light .navbar-nav .nav-item .nav-link {
-    color: #000;
+    color: #ffffff;
   }
   .navigation .logo-white {
     display: none;
@@ -587,12 +587,13 @@ a:focus, a:hover {
 }
 
 .sticky-header {
+  color: #ffffff !important;
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.06);
-  background: #fff;
+  background: #7f7f7f;
 }
 
 .sticky-header .navbar-light .navbar-nav .nav-item .nav-link {
-  color: #000;
+  color: #ffffff;
 }
 
 .sticky-header .logo-white {
