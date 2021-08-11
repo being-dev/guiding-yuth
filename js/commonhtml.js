@@ -1,9 +1,11 @@
 if (location.protocol == 'http:') {
-  location.href = location.href.replace("http", "https");
+  //location.href = location.href.replace("http", "https");
 }
 
 $(function () {
   $(window).on('load', function () {
+
+    checkLocationConfiguration();
 
     checkServerConfiguration();
 
@@ -104,9 +106,9 @@ $(function () {
     '<li class="nav-item ">' +
     '<a class="nav-link" href="candidate-queries.html">Queries</a>' +
     '</li>' +
-    // '<li class="nav-item ">' +
-    // '<a class="nav-link" href="javascript:void(0);" id="adminLogout">Logout</a>' +
-    // '</li>' +
+    '<li class="nav-item ">' +
+    '<a class="nav-link" href="javascript:void(0);" id="adminLogout">Logout</a>' +
+    '</li>' +
     '</ul>' +
     '</div>' +
     '</nav>' +
@@ -121,7 +123,7 @@ $(function () {
     '</footer>');
 
   $('#adminLogout').click(function (event) {
-    window.localStorage.clear();
+    $.removeCookie("access_token");
     window.location.href = './index.html';
   });
 });
@@ -133,31 +135,53 @@ function buildUrl(endpoint) {
 
 function checkServerConfiguration() {
   if (!window.localStorage.getItem('SERVER_API_URI') || window.localStorage.getItem('SERVER_API_URI').length == 0) {
-      loadServerConfiguration();
+    loadServerConfiguration();
   }
 }
 
 function loadServerConfiguration() {
   $.ajax({
-      url: '../config/app-dev-server-config.json',
-      type: 'GET',
-      dataType: 'json',
-      complete: function (xhr) {
-          if (xhr.status == 200) {
-              var json = (JSON.parse(xhr.responseText));
-              var AWS_SERVER_URI = "";
-              AWS_SERVER_URI = AWS_SERVER_URI.concat(json.protocol);
-              AWS_SERVER_URI = AWS_SERVER_URI.concat(json.subdomain);
-              AWS_SERVER_URI = AWS_SERVER_URI.concat('.');
-              AWS_SERVER_URI = AWS_SERVER_URI.concat(json.servername);
-              AWS_SERVER_URI = AWS_SERVER_URI.concat('/');
-              AWS_SERVER_URI = AWS_SERVER_URI.concat(json.stage);
-              AWS_SERVER_URI = AWS_SERVER_URI.concat(json.version);
-              AWS_SERVER_URI = AWS_SERVER_URI.concat(json.context);
-              window.localStorage.setItem('SERVER_API_URI', window.btoa(AWS_SERVER_URI));
-          } else {
-              alert('Something went wrong. Please try later sometime...')
-          }
+    url: '../config/app-dev-server-config.json',
+    type: 'GET',
+    dataType: 'json',
+    complete: function (xhr) {
+      if (xhr.status == 200) {
+        var json = (JSON.parse(xhr.responseText));
+        var AWS_SERVER_URI = "";
+        AWS_SERVER_URI = AWS_SERVER_URI.concat(json.protocol);
+        AWS_SERVER_URI = AWS_SERVER_URI.concat(json.subdomain);
+        AWS_SERVER_URI = AWS_SERVER_URI.concat('.');
+        AWS_SERVER_URI = AWS_SERVER_URI.concat(json.servername);
+        AWS_SERVER_URI = AWS_SERVER_URI.concat('/');
+        AWS_SERVER_URI = AWS_SERVER_URI.concat(json.stage);
+        AWS_SERVER_URI = AWS_SERVER_URI.concat(json.version);
+        AWS_SERVER_URI = AWS_SERVER_URI.concat(json.context);
+        window.localStorage.setItem('SERVER_API_URI', window.btoa(AWS_SERVER_URI));
+      } else {
+        alert('Something went wrong. Please try later sometime...')
       }
+    }
+  });
+}
+
+function checkLocationConfiguration() {
+  if (!window.localStorage.getItem('LOCATION_INFO') || window.localStorage.getItem('LOCATION_INFO').length == 0) {
+    getLocationInfo();
+  }
+}
+
+function getLocationInfo() {
+  $.ajax({
+    url: 'https://ipinfo.io?token=97141d06cbc205',
+    type: 'GET',
+    dataType: 'json',
+    complete: function (xhr) {
+      if (xhr.status == 200) {
+        var locationInfo = xhr.responseText;
+        window.localStorage.setItem('LOCATION_INFO', window.btoa(locationInfo));
+      } else {
+        alert('Something went wrong. Please try later sometime...')
+      }
+    }
   });
 }
