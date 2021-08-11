@@ -1,5 +1,5 @@
 if (location.protocol == 'http:') {
-  //location.href = location.href.replace("http", "https");
+  location.href = location.href.replace("http", "https");
 }
 
 $(function () {
@@ -141,7 +141,7 @@ function checkServerConfiguration() {
 
 function loadServerConfiguration() {
   $.ajax({
-    url: '../config/app-dev-server-config.json',
+    url: '../config/app-prod-server-config.json',
     type: 'GET',
     dataType: 'json',
     complete: function (xhr) {
