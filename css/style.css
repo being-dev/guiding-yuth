@@ -572,7 +572,7 @@ a:focus, a:hover {
     background: #fff;
   }
   .navigation .navbar-light .navbar-nav .nav-item .nav-link {
-    color: #ffffff;
+    color: black;
   }
   .navigation .logo-white {
     display: none;
